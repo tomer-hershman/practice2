@@ -5,12 +5,16 @@ import java.util.ArrayList;
 public class StringInfoSignal implements InfoSignal<String>{
     ArrayList<String> values;
 
+    public StringInfoSignal(ArrayList<String> values) {
+        this.values = values;
+    }
+
     @Override
     public String getLatestValue() {
-        try {
+        if (values.isEmpty()) {
             return values.get(values.size() - 1);
         }
-        catch (IndexOutOfBoundsException e) {
+        else {
             return null;
         }
     }
@@ -23,13 +27,6 @@ public class StringInfoSignal implements InfoSignal<String>{
     @Override
     public String[] getAsArray() {
         String[] array = new String[values.size()];
-        for (int i = 0; i < values.size(); i++) {
-            if (values.get(i) != null) {
-                array[i] = values.get(i);
-            } else {
-                array[i] = null;
-            }
-        }
-        return array;
+        return values.toArray(array);
     }
 }

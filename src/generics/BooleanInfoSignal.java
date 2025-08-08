@@ -5,12 +5,16 @@ import java.util.ArrayList;
 public class BooleanInfoSignal implements InfoSignal<Boolean> {
     ArrayList<Boolean> values;
 
+    public BooleanInfoSignal(ArrayList<Boolean> values) {
+        this.values = values;
+    }
+
     @Override
     public Boolean getLatestValue() {
-        try {
+        if (values.isEmpty()) {
             return values.get(values.size() - 1);
         }
-        catch (IndexOutOfBoundsException e) {
+        else {
             return null;
         }
     }
@@ -23,13 +27,6 @@ public class BooleanInfoSignal implements InfoSignal<Boolean> {
     @Override
     public Boolean[] getAsArray() {
         Boolean[] array = new Boolean[values.size()];
-        for (int i = 0; i < values.size(); i++) {
-            if (values.get(i) != null) {
-                array[i] = values.get(i);
-            } else {
-                array[i] = null;
-            }
-        }
-        return array;
+        return values.toArray(array);
     }
 }
