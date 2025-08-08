@@ -9,25 +9,25 @@ public class TaskManager {
         tasks.add(task);
     }
 
-    public static void criateTask(String name, boolean isDone, int importance) {
+    public static void createTask(String name, boolean isDone, int importance) {
         Task task = new Task(name, isDone, importance);
         addTaskToList(task);
     }
 
 
-    public static void filterTasks(TaskFilter filter, ActionOnFilteredTask action) {
+    public static void filterTasksInternal(TaskFilter filter, ActionOnFilteredTask action,boolean IsReversed) {
         for (Task task : tasks) {
-            if (filter.filterTask(task)) {
+            if (filter.filterTask(task) ^ IsReversed) {
                 action.actionOnFilteredTask(task);
             }
         }
     }
+    public static void filterTasks(TaskFilter filter, ActionOnFilteredTask action){
+        filterTasksInternal(filter, action, false);
+    }
+
     public static void filterTasksReversed(TaskFilter filter, ActionOnFilteredTask action) {
-        for (Task task : tasks) {
-            if (!(filter.filterTask(task))) {
-                action.actionOnFilteredTask(task);
-            }
-        }
+        filterTasksInternal(filter, action, true);
     }
 
 

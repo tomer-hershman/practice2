@@ -1,9 +1,9 @@
 package lambda;
 
 public class Task {
-    public String name;
-    public boolean isDone;
-    public int importance;
+    private String name;
+    private boolean isDone;
+    private int importance;
     Task(String name, boolean isDone, int importance) {
         this.name = name;
         this.isDone = isDone;
